@@ -14,8 +14,8 @@ const axiosInstance = axios.create({
         'Expires': '0'
     },
     withCredentials: true,
-    // This caused me a lot of grief not knowing this existed.
-    // Without this the API would return 419 errors
+    // axios only copies the XSRF cookie into the request header when this is
+    // set; without it the portal answers 419.
     withXSRFToken: true
 });
 

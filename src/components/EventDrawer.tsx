@@ -146,8 +146,7 @@ export default function EventDrawer({ event, isOpen, onClose, isEmbedded, onNavi
     if (event) {
       try {
         eventUrl = new URL(getLocalEventPath(event), window.location.origin).href
-      } catch (error) {
-        console.log('Error constructing event URL, falling back to current page:', error)
+      } catch {
         eventUrl = window.location.href
       }
     }
@@ -160,15 +159,15 @@ export default function EventDrawer({ event, isOpen, onClose, isEmbedded, onNavi
           text: `When: ${when} \nWhere: ${fullEvent?.location_address}`,
           url: eventUrl,
         })
-      } catch (error) {
-        console.log('Error sharing', error)
+      } catch {
+        // The visitor closed the share sheet, or the browser refused it.
       }
     } else {
       try {
         await navigator.clipboard.writeText(eventUrl)
         alert('URL copied to clipboard.')
-      } catch (error) {
-        console.log('Failed to copy URL', error)
+      } catch {
+        // Clipboard access refused; there is nothing to fall back to.
       }
     }
   }

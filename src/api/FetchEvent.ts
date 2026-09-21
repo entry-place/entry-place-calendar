@@ -340,14 +340,12 @@ export async function getEventWithPossibleSessionDetails(eventId: string, sessio
             }
             return response.data;
         } else {
-            console.log('Network response was not ok');
             throw new Error('Network response was not ok');
         }
     } catch (error: any) {
         if (error.response?.status === 404) {
           throw new Error("EventNotFound");
         }
-        console.log('Error fetching event data:', error);
         throw new Error(`${error}`);
     }
 }
@@ -355,7 +353,6 @@ export async function getEventWithPossibleSessionDetails(eventId: string, sessio
 export async function resolveSlug(slug: string, forceOpenId: string | null = null): Promise<SlugResolveResponse> {
     try {
         const url = `${process.env.NEXT_PUBLIC_API_HOST}/online-entry-api/resolve/${slug}`;
-        console.log('Resolving slug:', url);
         const response = await fetch(url, {
             next: { revalidate: 60 },
             headers: entryPlaceApiHeaders(),
@@ -386,7 +383,6 @@ export async function resolveSlug(slug: string, forceOpenId: string | null = nul
         if (error.response?.status === 404) {
             throw new Error("SlugNotFound");
         }
-        console.log('Error resolving slug:', error);
         throw new Error(`${error}`);
     }
 }
