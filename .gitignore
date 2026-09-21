@@ -1,0 +1,11 @@
+/node_modules
+*.tsbuildinfo
+.DS_Store
+.claude/settings.local.json
+
+# Example app / test harness
+example/node_modules
+example/.next
+example/test-results
+example/playwright-report
+example/*.tgz

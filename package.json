@@ -1,0 +1,74 @@
+{
+  "name": "@entry-place/calendar",
+  "version": "0.1.0",
+  "description": "Entry Place calendar UI for Next.js sites: event list, event drawer, results and sponsor ads.",
+  "keywords": [
+    "entry-place",
+    "calendar",
+    "events",
+    "motorsport",
+    "nextjs",
+    "react",
+    "tailwindcss"
+  ],
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/entry-place/entry-place-calendar.git"
+  },
+  "homepage": "https://github.com/entry-place/entry-place-calendar#readme",
+  "bugs": {
+    "url": "https://github.com/entry-place/entry-place-calendar/issues"
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles.css": "./styles.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "styles.css"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "npm --prefix example run test",
+    "example": "npm --prefix example run dev",
+    "prepublishOnly": "npm run typecheck && npm test"
+  },
+  "devDependencies": {
+    "@headlessui/react": "^2.2.10",
+    "@heroicons/react": "^2.2.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "axios": "^1.19.0",
+    "clsx": "^2.1.1",
+    "next": "^16.3.2",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-hot-toast": "^2.6.0",
+    "react-modal-sheet": "^2.2.1",
+    "typescript": "^5"
+  },
+  "peerDependencies": {
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
+    "axios": "^1.19.0",
+    "clsx": "^2.1.0",
+    "next": ">=16",
+    "react": ">=19",
+    "react-dom": ">=19",
+    "react-hot-toast": "^2.6.0",
+    "react-modal-sheet": "^2.2.0",
+    "tailwindcss": "^4"
+  }
+}

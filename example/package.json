@@ -1,0 +1,36 @@
+{
+  "name": "entry-place-calendar-example",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "prepare": "node sync-package.mjs",
+    "sync": "node sync-package.mjs",
+    "mock": "node mock-portal.mjs",
+    "dev": "next dev --port 4011",
+    "build": "next build",
+    "start": "next start --port 4011",
+    "pretest": "npm run sync && npm run build",
+    "test": "playwright test",
+    "test:install": "playwright install chromium"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.10",
+    "@heroicons/react": "^2.2.0",
+    "axios": "^1.19.0",
+    "clsx": "^2.1.1",
+    "next": "16.3.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-hot-toast": "^2.6.0",
+    "react-modal-sheet": "^2.2.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
