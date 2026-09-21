@@ -1,6 +1,6 @@
 {
   "name": "@entry-place/calendar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Entry Place calendar UI for Next.js sites: event list, event drawer, results and sponsor ads.",
   "keywords": [
     "entry-place",

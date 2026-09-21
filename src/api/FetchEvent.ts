@@ -1,7 +1,5 @@
 import { AxiosResponse } from 'axios';
 import axios from './axios';
-import { entryPlaceApiHeaders } from './credentials';
-import { EntryPlaceCalendar, YearMonthEventGroup } from './FetchCalendar';
 
 export interface Session {
     id: number;
@@ -274,46 +272,6 @@ interface SessionRosterContact {
     event: EntryPlaceEvent;
   }
 
-  export interface MetaData {
-    title: string;
-    description: string;
-    canonicalUrl: string;
-    imageUrl?: string;
-    siteName: string;
-  }
-
-  export interface OrganiserMenuItem {
-    name: string;
-    path: string;
-    calendarSlug?: string;
-    heroiconName: string;
-  }
-
-  export interface OrganiserSocialLink {
-    type: 'website' | 'facebook' | 'instagram';
-    url: string;
-    label: string;
-  }
-
-  export interface Organiser {
-    slug: string;
-    name: string;
-    preference: 'latest' | 'calendar';
-    menuItems: OrganiserMenuItem[];
-    logoImageUrl?: string;
-    socialLinks?: OrganiserSocialLink[];
-  }
-
-  export interface SlugResolveResponse {
-    type: 'calendar' | 'event' | 'organiser' | null;
-    calendar?: EntryPlaceCalendar;
-    calendarEvents?: YearMonthEventGroup[];
-    event?: EntryPlaceEvent;
-    session?: SessionData;
-    organiser?: Organiser;
-    metadata: MetaData;
-  }
-
 export async function getEventWithPossibleSessionDetails(eventId: string, sessionId: string | null, form: string | null, forceOpenId: string | null): Promise<EventSessionResponse> {
     try {
         var path = '/api/v1/omni-event/' + eventId;
@@ -345,43 +303,6 @@ export async function getEventWithPossibleSessionDetails(eventId: string, sessio
     } catch (error: any) {
         if (error.response?.status === 404) {
           throw new Error("EventNotFound");
-        }
-        throw new Error(`${error}`);
-    }
-}
-
-export async function resolveSlug(slug: string, forceOpenId: string | null = null): Promise<SlugResolveResponse> {
-    try {
-        const url = `${process.env.NEXT_PUBLIC_API_HOST}/online-entry-api/resolve/${slug}`;
-        const response = await fetch(url, {
-            next: { revalidate: 60 },
-            headers: entryPlaceApiHeaders(),
-        });
-
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('Failed to resolve slug:', response.status, errorText);
-            throw new Error(`Failed to resolve slug: ${response.status} ${errorText}`);
-        }
-
-        const data: SlugResolveResponse = await response.json();
-
-        // Handle forceOpenId for events similar to existing logic
-        if (data.type === 'event' && data.event && forceOpenId) {
-            try {
-                const decodedEventId = atob(forceOpenId);
-                if (decodedEventId && decodedEventId == data.event.id) {
-                    data.event.entries_status = 'Live';
-                }
-            } catch (err) {
-                console.error("Error decoding forceOpenId:", err);
-            }
-        }
-
-        return data;
-    } catch (error: any) {
-        if (error.response?.status === 404) {
-            throw new Error("SlugNotFound");
         }
         throw new Error(`${error}`);
     }
